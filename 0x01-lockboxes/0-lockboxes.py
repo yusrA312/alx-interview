@@ -1,31 +1,20 @@
 #!/usr/bin/python3
-"""
-Module Docs
-"""
+""" the lockup interview"""
 
 
 def canUnlockAll(boxes):
-    """
-    Function Docs
-    """
-    # Number of boxes
+    """ l check for your boxes
+    if they opened """
     n = len(boxes)
+    yopened = [False] * n
+    yopened[0] = True
+    keys = [0]
 
-    # Set to keep track of unlocked boxes
-    unlocked = set()
-    unlocked.add(0)  # First box is unlocked
+    while keys:
+        c_key = keys.pop()
+        for key in boxes[ckey]:
+            if key < n and not yopened[key]:
+                yopened[key] = True
+                keys.append(key)
 
-    # Stack to keep track of boxes to check
-    stack = [0]  # Start with the first box
-
-    # Traverse boxes
-    while stack:
-        current_box = stack.pop()
-
-        for key in boxes[current_box]:
-            if key < n and key not in unlocked:
-                unlocked.add(key)
-                stack.append(key)
-
-    # Check if all boxes are unlocked
-    return len(unlocked) == n
+    return all(yopened)
