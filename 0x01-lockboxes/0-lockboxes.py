@@ -1,25 +1,31 @@
 #!/usr/bin/python3
-""" This module has the answer to the lockup interview question """
+"""
+Module Docs
+"""
 
 
 def canUnlockAll(boxes):
-      '''Checks if all the boxes in a list of boxes containing the keys
-    (indices) to other boxes can be unlocked given that the first
-    box is unlocked.
-    '''
+    """
+    Function Docs
+    """
     # Number of boxes
-    
     n = len(boxes)
-    OP = [False] * n
-    OP[0] = True
-    keys = [0]
-    
-     # Traverse boxes
-    while keys:
-        current_key = keys.pop()
-        for key in boxes[current_key]:
-            if key < n and not OP[key]:
-                OP[key] = True
-                keys.append(key)
 
-    return all(OP)
+    # Set to keep track of unlocked boxes
+    unlocked = set()
+    unlocked.add(0)  # First box is unlocked
+
+    # Stack to keep track of boxes to check
+    stack = [0]  # Start with the first box
+
+    # Traverse boxes
+    while stack:
+        current_box = stack.pop()
+
+        for key in boxes[current_box]:
+            if key < n and key not in unlocked:
+                unlocked.add(key)
+                stack.append(key)
+
+    # Check if all boxes are unlocked
+    return len(unlocked) == n
