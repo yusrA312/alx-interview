@@ -12,7 +12,7 @@ def canUnlockAll(boxes):
 
     while keys:
         c_key = keys.pop()
-        for key in boxes[ckey]:
+        for key in boxes[c_key]:
             if key < n and not yopened[key]:
                 yopened[key] = True
                 keys.append(key)
