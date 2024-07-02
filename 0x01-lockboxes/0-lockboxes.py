@@ -3,23 +3,18 @@
 
 
 def canUnlockAll(boxes):
-      '''Checks if all the boxes in a list of boxes containing the keys
-    (indices) to other boxes can be unlocked given that the first
-    box is unlocked.
-    '''
-    # Number of boxes
-    
-    num = len(boxes)
-    OP = [False] * num
-    OP[0] = True
+    """ This is the method that will check for your boxes
+    if they can be opened or not"""
+    n = len(boxes)
+    opened = [False] * n
+    opened[0] = True
     keys = [0]
-    
-     # Traverse boxes
+
     while keys:
         current_key = keys.pop()
         for key in boxes[current_key]:
-            if key < num and not OP[key]:
-                OP[key] = True
+            if key < n and not opened[key]:
+                opened[key] = True
                 keys.append(key)
 
-    return all(OP)
+    return all(opened)
