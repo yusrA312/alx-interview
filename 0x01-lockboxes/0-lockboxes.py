@@ -1,20 +1,19 @@
 #!/usr/bin/python3
-""" This module has the answer to the lockup interview question """
+""" the lockup interview """
 
 
 def canUnlockAll(boxes):
-    """ This is the method that will check for your boxes
-    if they can be opened or not"""
-    n = len(boxes)
-    opened = [False] * n
-    opened[0] = True
-    keys = [0]
+    """  check boxes"""
+    yy = len(boxes)
+    yopened = [False] * yy
+    yopened[0] = True
+    ykeys = [0]
 
-    while keys:
-        current_key = keys.pop()
+    while ykeys:
+        current_key = ykeys.pop()
         for key in boxes[current_key]:
-            if key < n and not opened[key]:
-                opened[key] = True
+            if key < yy and not yopened[key]:
+                yopened[key] = True
                 keys.append(key)
 
-    return all(opened)
+    return all(yopened)
