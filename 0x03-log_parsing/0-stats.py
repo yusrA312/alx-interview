@@ -20,11 +20,10 @@ def Codes():
     """
     function to print the codes and the number of ocurrence
     """
-    
     print("File size: {}".format(count["size"]))
-    
+
     for key in sorted(sCode.keys()):
-        
+
         if sCode[key] != 0:
             print("{}: {}".format(key, sCode[key]))
 
@@ -33,13 +32,12 @@ def CodeSize(listData):
     """
     count the codes and file size
     """
-    
+
     count["size"] += int(listData[-1])
-   
+
     if listData[-2] in sCode:
-        
+
         sCode[listData[-2]] += 1
-        
 
 
 if __name__ == "__main__":
