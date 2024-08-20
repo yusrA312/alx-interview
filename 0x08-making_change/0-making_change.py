@@ -1,13 +1,11 @@
 #!/usr/bin/python3
-""" this file contains a script that determine
+""" 
 the fewest number of coins needed to meet a given amount total"""
 
 
 def makeChange(coins, total):
     """
-    Determines the fewest number of coins needed to meet a
-    given amount total by given a pile of coins of
-    different values
+    the fewest number
     """
 
     if total <= 0:
