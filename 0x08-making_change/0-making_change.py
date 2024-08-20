@@ -13,17 +13,17 @@ def makeChange(coins, total):
     if total <= 0:
         return 0
 
-    cou = 0
-    re = total
+    coins_count = 0
+    reste = total
     idx = 0
     sorted_list_coins = sorted(coins, reverse=True)
     n = len(coins)
-    while re > 0:
+    while reste > 0:
         if idx >= n:
             return -1
-        if re - sorted_list_coins[idx] >= 0:
-            re -= sorted_list_coins[idx]
-            cou += 1
+        if reste - sorted_list_coins[idx] >= 0:
+            reste -= sorted_list_coins[idx]
+            coins_count += 1
         else:
             idx += 1
-    return coun
+    return coins_count
