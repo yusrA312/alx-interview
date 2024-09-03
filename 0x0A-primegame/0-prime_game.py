@@ -1,29 +1,57 @@
 #!/usr/bin/python3
-"""Program that performs prime game"""
+"""Module for Prime Game."""
+
+
+def generatePrimeFlags(maxValue):
+    """Generates a list where the index represents the number,
+       and the value at each index indicates whether it is prime."""
+    primeFlags = [True] * (maxValue + 1)
+    primeFlags[0] = primeFlags[1] = False  # 0 and 1 are not primes
+    currentPrime = 2
+    while currentPrime * currentPrime <= maxValue:
+        if primeFlags[currentPrime]:
+            for i in range(currentPrime * currentPrime,
+                           maxValue + 1,
+                           currentPrime):
+                primeFlags[i] = False
+        currentPrime += 1
+    return primeFlags
+
+
+def calculatePrimeCount(primeFlags, limit):
+    """For each limit, count how many primes are available.
+       The winner of the round depends on whether the count
+       of primes is odd or even."""
+    primeCounter = 0
+    for i in range(2, limit + 1):
+        if primeFlags[i]:
+            primeCounter += 1
+    return primeCounter % 2
 
 
 def isWinner(x, nums):
-    """Function that performs prime game"""
-    if not nums or x < 1:
+    """Determine the overall winner of the Prime Game."""
+    if x <= 0 or not nums:
         return None
-    n = max(nums)
-    fltr = [True for _ in range(max(n + 1, 2))]
-    for i in range(2, int(pow(n, 0.5)) + 1):
-        if not fltr[i]:
-            continue
-        for j in range(i * i, n + 1, i):
-            fltr[j] = False
-    fltr[0] = fltr[1] = False
-    c = 0
-    for i in range(len(fltr)):
-        if fltr[i]:
-            c += 1
-        fltr[i] = c
-    plyr1 = 0
-    for n in nums:
-        plyr1 += fltr[n] % 2 == 1
-    if plyr1 * 2 == len(nums):
-        return None
-    if plyr1 * 2 > len(nums):
+
+    maxValue = max(nums)
+    primeFlags = generatePrimeFlags(maxValue)
+
+    mariaWins = 0
+    benWins = 0
+
+    for limit in nums:
+        if limit == 1:
+            benWins += 1
+        else:
+            if calculatePrimeCount(primeFlags, limit) == 1:
+                mariaWins += 1
+            else:
+                benWins += 1
+
+    if mariaWins > benWins:
         return "Maria"
-    return "Ben"`
+    elif benWins > mariaWins:
+        return "Ben"
+    else:
+        return None
